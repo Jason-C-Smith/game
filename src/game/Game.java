@@ -7,6 +7,9 @@ import java.awt.*;
 // // 
 // LocationDemo - Demonstrates the use of location/exit objects // 
 // Last modification date : October 08, 1997 // 
+
+
+
 public class Game extends Applet { 
 	
 	Location currentLocation; 
@@ -77,6 +80,9 @@ public class Game extends Applet {
 		repaint(); 
 		} 
 	private void showLocation() { 
+		// Clear screen
+		displayOutput.setText("");
+		
 		// Show room title 
 		displayOutput.append( "\n" + currentLocation.getTitle() + "\n" ); displayOutput.append( "\n" ); 
 		
@@ -85,8 +91,8 @@ public class Game extends Applet {
 		
 		displayOutput.append( "\nAvailable exits : \n" ); 
 			
-			for (Enumeration e = currentLocation.getExits().elements(); e.hasMoreElements();) { 
-				Exit an_exit = (Exit) e.nextElement(); 
+			for (Object element : currentLocation.getExits()) { 
+				Exit an_exit = (Exit) element; 
 				displayOutput.append(an_exit + "\n");
 			}
 			} 
@@ -108,8 +114,8 @@ public class Game extends Applet {
 			command = command.toUpperCase();
 			
 			// Search for an exit match 
-			for (Enumeration e = currentLocation.getExits().elements(); e.hasMoreElements();) { 
-					Exit an_exit = (Exit) e.nextElement(); 
+			for (Object element : currentLocation.getExits()) { 
+					Exit an_exit = (Exit) element; 
 					if ( (an_exit.getDirectionName().compareTo(command) == 0) || (an_exit.getShortDirectionName().compareTo(command) == 0 ) ) { 
 						
 						// Set location to the location pointed to by exit 
