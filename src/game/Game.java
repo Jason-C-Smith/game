@@ -12,6 +12,10 @@ import java.awt.*;
 
 public class Game extends Applet { 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -775947257019961541L;
 	Location currentLocation; 
 	String command; 
 	TextField commandInput; 
@@ -28,7 +32,8 @@ public class Game extends Applet {
 	public void init() { 
 		super.init(); 
 		
-		// Define colors 
+		// Define colors
+		setSize(800, 480);
 		setBackground(Color.white); 
 		setForeground(Color.black); 
 		Panel appletPanel = new Panel();
@@ -37,7 +42,7 @@ public class Game extends Applet {
 		BorderLayout b = new BorderLayout(); 
 		appletPanel.setLayout (b); 
 		add(appletPanel); 
-		
+				
 		// Define UI items 
 		commandInput = new TextField(20); 
 		displayOutput = new TextArea( 10, 60); 
@@ -75,11 +80,27 @@ public class Game extends Applet {
 		// Set up room locations 
 		currentLocation = l1; 
 		
+		//CREATE STRING THAT OBJECT WILL USE
+		String actor1 = " ";
+				
+		//INITALLIZE NEW OBJECT FROM CLASS CHARACTER
+		Character actor = new Character();
+		
+		//ASSIGN VARIABLE FROM NEW OBJECT
+		actor1 = actor.setName();
+		 
+		System.out.print(actor1);
+		
+		actor.getName(actor1);
+		System.out.print(actor1);
 		// Show first location 
-		showLocation(); 
+		
+		showLocation(actor1); 
 		repaint(); 
+		
 		} 
-	private void showLocation() { 
+
+	private void showLocation(String actor1) { 
 		// Clear screen
 		displayOutput.setText("");
 		
@@ -88,9 +109,8 @@ public class Game extends Applet {
 		
 		// Show room description 
 		displayOutput.append( currentLocation.getDescription() + "\n" ); 
-		
 		displayOutput.append( "\nAvailable exits : \n" ); 
-			
+		displayOutput.append(" " + actor1 + "\n ");	
 			for (Object element : currentLocation.getExits()) { 
 				Exit an_exit = (Exit) element; 
 				displayOutput.append(an_exit + "\n");
@@ -122,7 +142,7 @@ public class Game extends Applet {
 						currentLocation = an_exit.getLeadsTo();
 						
 						// Show new location
-						showLocation(); 
+						showLocation(command); 
 						
 						// Clear text area 
 						commandInput.setText (new String()); 
@@ -155,3 +175,4 @@ public class Game extends Applet {
 }
 		
 	
+
